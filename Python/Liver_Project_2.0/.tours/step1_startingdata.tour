@@ -1,0 +1,41 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Step1_StartingData",
+  "steps": [
+    {
+      "file": "LiverProject_env/Liver_Project/Step1_StartingData/SSA/PointCloud_Database.py",
+      "description": "Per prima cosa si importa il database di fegati, selezionando 1 template di base e N(= 20) target; successivamente si effettua la conversione da mesh superficiale (file .stl) in nuvola di punti che restituirà 1 array 2D per ogni fegato di dimensione (M punti, 3) in quanto la nuvola di punti è localizzata nello spazio\r\n",
+      "line": 6
+    },
+    {
+      "file": "LiverProject_env/Liver_Project/Step1_StartingData/SSA/PointCloud_Database.py",
+      "description": "Successivamente, al fine di ottenere un corretto matching tra le operazioni che saranno successivamente effettuate sugli array delle nuvole di punti, si effettua un reshape di ogni array convertendoli tutti in array 2D di dimensione (50000, 3), andando a 'sfoltire' leggermente quelle che sono le nuvole di punti iniziali che, data la finezza della mesh avranno un numero di punti sicuramente > 50000",
+      "line": 33
+    },
+    {
+      "file": "LiverProject_env/Liver_Project/Step1_StartingData/SSA/RigidRegistration.py",
+      "description": "Al fine di ottenere una parametrizzazione della forma che contenga tutti i principali modi di deformazione per la registrazione di un fegato di base su un qualsiasi altro tipo di fegato, il primo step è la registrazione rigida del template per ogni target; al fine di ottenere il risultato voluto la prima operazione da effettuare sarà una sovrapposizione il più accurata possibile, la quale si compone di 3 passaggi principali: \r\n1 --> ricercare i punti più vicini tra il template e il target i-esimo\r\n2 --> effettuare una trasformazione rigida composta dalla matrice di rotazione R e dal vettore di traslazione tra i due fegati\r\n3 --> applicare la trasformazione non rigida al fegato di base ottenendo una lista di 20 fegati template: uno registrato rigidatamente ad ogni target",
+      "line": 6
+    },
+    {
+      "file": "LiverProject_env/Liver_Project/Step1_StartingData/SSA/RigidRegistration.py",
+      "description": "effettuata la trasformazione rigida principale si va a sovrapporre le coppie di fegati ottenute (template, target) andando a sovrapporre i baricentri di questi ultimi",
+      "line": 62
+    },
+    {
+      "file": "LiverProject_env/Liver_Project/Step1_StartingData/SSA/RigidRegistration.py",
+      "description": "Per affinare la trasformazione rigida si effettua un protocollo iterativo del tipo Iterative Closest Point --> tale metodo viene utilizzato per ridurre al minimo al sovrapposizione rigida tra nuvole di punti, spline o, più in generale, oggetti 2D o 3D",
+      "line": 88
+    },
+    {
+      "file": "LiverProject_env/Liver_Project/Step1_StartingData/SSA/NonRigidRegistration.py",
+      "description": "In penultima battuta troviamo la registrazione non rigida effettuata mediante un algoritmo di machine learning che prende il nome di Thin Plate Spline nella quale andiamo ad adattare la forma dell'i-esimo template adattato rigidamente all'i-esimo target attraverso un displacement opportunamente valutato dal metodo implementato",
+      "line": 6
+    },
+    {
+      "file": "LiverProject_env/Liver_Project/Step1_StartingData/PCA/PrincipalComponentAnalysis.py",
+      "description": "Per concludere, si effettua la Principal Component Analysis per ottenere gli autovalori (parametri di forma) e gli autovettore (modi principali) di deformazione dei template non rigidamente registrati; successivamente si va ad effettuare una riduzione della dimensione di tale spazio delle deformazioni andando a scegliere gli N(=20) autovalori massimi dalla quale derivano gli N modi principali di deformazione. In conclusione si va a sommare il displacement ottenuto dagli N parametri di forma e modi principali alla forma media dei template così da ottenere una parametrizzazione della forma opportuna",
+      "line": 5
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+    "python.analysis.extraPaths": [
+        "./LiverProject_env/Liver_Project/Step1_StartingData/PCA",
+        "./LiverProject_env/Liver_Project/Step1_StartingData/SSA",
+        "./LiverProject_env/Liver_Project/Step2_BoundaryConditions/Displacement_Breathing",
+        "./LiverProject_env/Liver_Project/Step3_BreathingSimulation",
+        "./LiverProject_env/Liver_Project/Step4_SSL/fromCSVtoORIGIN",
+        "./LiverProject_env/Liver_Project/Step4_SSL/InputSetting",
+        "./LiverProject_env/Liver_Project/Step4_SSL/SparseGrid",
+        "./LiverProject_env/Liver_Project/Step4_SSL/Solid"
+    ],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[python]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    } 
+}
