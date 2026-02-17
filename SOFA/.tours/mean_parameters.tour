@@ -1,0 +1,36 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "mean_parameters",
+  "steps": [
+    {
+      "file": "mean_E_ni copy.py",
+      "description": "converto il file .csv della matrice di rigidezza globale media in modo da poter intervenire su essa come un array 2D.",
+      "line": 4
+    },
+    {
+      "file": "mean_E_ni copy.py",
+      "description": "Grazie alle informazioni inerenti ai tetraedri, posso estrarre le singole matrici di rigidezza locali.\r\nTali matrici saranno matrici 12 x 12 dove i suoi elementi saranno estratti andando a mappare i gradi di libertà del singolo tetraedro (4 nodi x 3 dof) nella matrice globale ed estraendo tale valore. \r\nEssendo inoltre la matrice globale la somma di più matrici di rigidezza locali ognuna delle quali rappresenta la rigidezza di un singolo tetraedro, allora sicuramente esistono tetraedri all'interno di una mesh che condividono punti identici, ciò si traduce nel fatto che, durante la somma, tetraedri che condividono medesimi gradi di libertà a causa dei punti in comune, condivideranno anche la stessa posizione i,j all'interno della matrice globale, proprio per questo, si va a contare per ogni punti del tetraedro, quanti tetraedri costituiscono contemporaneamente, andando a dividere gli elementi i, j in comune per tale valore, ciò presuppone l'ipotesi che la rigidezza dei tetraedri in tale nodo sia sempre la medesima, cosa non vera ma accettabile ai fini del modello.",
+      "line": 26
+    },
+    {
+      "file": "mean_E_ni copy.py",
+      "description": "calcolo della matrice J di tensione-spostamento che lega la matrice di elasticità (calcolata successivamente) con la matrice di rigidezza locale di ogni elemento. Tale matrice è stata calcolata in accordo col metodo ThetraedralCorotationalFEMForceField utilizzato per il modello di fegato.",
+      "line": 72
+    },
+    {
+      "file": "mean_E_ni copy.py",
+      "description": "Calcolo della matrice di elasticità C nell'ipotesi di materiale lineare ed isotropo, attraverso l'utilizzo della matrice pseudo inversa di J. In questo modo si creano due relazioni in grado di calcolare i parametri E e nu.",
+      "line": 171
+    },
+    {
+      "file": "mean_E_ni copy.py",
+      "description": "Implementazione di una funzione in grado di elaborare i parametri E e nu per ogni singolo tetraedro, andando successivamente ad effettuare la media dei valori, ottenendo così i valori medi da utilizzare nella validazione vera e propria. Inoltre, ad inizio funzione è stato aggiunto un algoritmo che non prende in considerazione i tetraedri costituiti da punti i cui gradi di libertà supererebbero quelli utilizzati per calcolare la matrice globale, così da rendere l'algoritmo possibile anche per mesh più fini.",
+      "line": 200
+    },
+    {
+      "file": "mean_E_ni copy.py",
+      "description": "Come prima cosa sono state estratte le informazioni necessarie dalla mesh tetragonale volumetrica del fegato di test. In particolare, attraverso l’utilizzo della libreria MeshIO, sono stati estratti:\r\nLe coordinate dei nodi della mesh\r\nGli indici dei nodi che costituiscono i tetraedri\r\n",
+      "line": 11
+    }
+  ]
+}
